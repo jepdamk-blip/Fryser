@@ -1,12 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="da">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/icons/icon-192x192.png" sizes="192x192">
+    <link rel="icon" href="/icons/icon-512x512.png" sizes="512x512">
     <title>Freezer Overview PWA</title>
+    <script src="/js/idb-photos.js" defer></script>
+    <script src="/js/app.js" defer></script>
 </head>
 <body>
-    <h1>Welcome to the Freezer Overview Application</h1>
-    <p>This is a Progressive Web App designed to manage your freezer inventory.</p>
+    <header>
+        <h1>Freezer Oversigt</h1>
+    </header>
+
+    <main>
+        <section id="items">
+            <h2>Varer i fryseren</h2>
+            <!-- Item list will be populated here -->
+        </section>
+    </main>
+
+    <button id="fab" aria-label="Add Item">+</button>
+
+    <!-- Modals -->
+    <div id="itemModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Tilføj Vare</h2>
+            <!-- Item form goes here -->
+        </div>
+    </div>
+
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Indstillinger</h2>
+            <!-- Settings form goes here -->
+        </div>
+    </div>
+
+    <div id="moveModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Flyt Vare</h2>
+            <!-- Move item form goes here -->
+        </div>
+    </div>
+
+    <script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+                console.log('Service Worker registered with scope:', registration.scope);
+            }, function(err) {
+                console.log('Service Worker registration failed:', err);
+            });
+        });
+    }
+    </script>
 </body>
 </html>
